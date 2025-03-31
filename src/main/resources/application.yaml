@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: booking-service
+  profiles:
+    active: test
+
+server:
+  port: 8080
+
+---
+
+spring:
+  profile:
+    include: test
+
+logging:
+  level:
+    com.statista.code: DEBUG
+
+---
+
+spring:
+  profile:
+    include: production
+
+logging:
+  level:
+    com.statista.code: INFO

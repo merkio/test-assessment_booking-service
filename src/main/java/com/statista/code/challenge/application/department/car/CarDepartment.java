@@ -1,0 +1,35 @@
+package com.statista.code.challenge.application.department.car;
+
+import com.statista.code.challenge.application.department.Department;
+import com.statista.code.challenge.domain.booking.Booking;
+import com.statista.code.challenge.domain.department.BusinessResult;
+import com.statista.code.challenge.domain.department.DepartmentName;
+import com.statista.code.challenge.domain.department.ResultStatus;
+import com.statista.code.challenge.domain.notification.Email;
+import com.statista.code.challenge.domain.notification.NotificationAdapter;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@RequiredArgsConstructor
+public class CarDepartment implements Department {
+
+    private final NotificationAdapter notificationAdapter;
+
+    @Override
+    public DepartmentName name() {
+        return DepartmentName.CAR;
+    }
+
+    @Override
+    public BusinessResult doBusiness(Booking booking) {
+        try {
+            // Do some business
+            notificationAdapter.sendEmail(Email.builder().email(booking.email).body(booking.id).build());
+            return new BusinessResult(ResultStatus.OK);
+        } catch (Exception e) {
+            log.error("Error during doBusiness with booking [{}]", booking.id);
+            return new BusinessResult(ResultStatus.ERROR);
+        }
+    }
+}
