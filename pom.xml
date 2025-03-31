@@ -9,6 +9,7 @@
         <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <groupId>org.example.code.challenge</groupId>
     <artifactId>booking-service</artifactId>
     <properties>
         <lombok.version>1.18.34</lombok.version>
